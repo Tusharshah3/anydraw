@@ -5,7 +5,13 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "prisma:migrate": "cd packages/db && npx prisma migrate deploy",
+    "prisma:generate": "cd packages/db && npx prisma generate",
+    "build:http": "npm run prisma:migrate && npm run prisma:generate && cd apps/http-backend && pnpm install && pnpm run build",
+    "start:http": "cd apps/http-backend && pnpm run start",
+    "build:ws": "npm run prisma:migrate && npm run prisma:generate && cd apps/ws-backend && pnpm install && pnpm run build",
+    "start:ws": "cd apps/ws-backend && pnpm run start"
   },
   "devDependencies": {
     "prettier": "^3.2.5",
